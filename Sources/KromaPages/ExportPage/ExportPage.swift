@@ -12,7 +12,7 @@ public struct ExportPage: PageModule {
 
     public static func isVisible(in context: PageContext) -> Bool { true }
 
-    public static func makeView(host: any PageHost) -> AnyView {
+    @MainActor public static func makeView(host: any PageHost) -> AnyView {
         AnyView(PagePlaceholderView(title: title, detail: "M5/M6 – export fotek, videa, GIF/WebP/MP4, fronta, presety"))
     }
 }

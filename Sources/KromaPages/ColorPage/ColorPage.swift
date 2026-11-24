@@ -12,7 +12,7 @@ public struct ColorPage: PageModule {
 
     public static func isVisible(in context: PageContext) -> Bool { true }
 
-    public static func makeView(host: any PageHost) -> AnyView {
+    @MainActor public static func makeView(host: any PageHost) -> AnyView {
         AnyView(PagePlaceholderView(title: title, detail: "M3 – kola, qualifier, křivky, node tree, LUT, scopes"))
     }
 }

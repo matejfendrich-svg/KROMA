@@ -12,7 +12,7 @@ public struct ImportPage: PageModule {
 
     public static func isVisible(in context: PageContext) -> Bool { true }
 
-    public static func makeView(host: any PageHost) -> AnyView {
+    @MainActor public static func makeView(host: any PageHost) -> AnyView {
         AnyView(PagePlaceholderView(title: title, detail: "M1 – výběr složky, mřížka náhledů, culling, import do projektu"))
     }
 }

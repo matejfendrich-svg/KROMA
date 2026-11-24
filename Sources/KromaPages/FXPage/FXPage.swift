@@ -12,7 +12,7 @@ public struct FXPage: PageModule {
 
     public static func isVisible(in context: PageContext) -> Bool { true }
 
-    public static func makeView(host: any PageHost) -> AnyView {
+    @MainActor public static func makeView(host: any PageHost) -> AnyView {
         AnyView(PagePlaceholderView(title: title, detail: "M4 – halftone, pixel, písmenný raster, depth node"))
     }
 }

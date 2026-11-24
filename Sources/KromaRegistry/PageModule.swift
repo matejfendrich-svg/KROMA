@@ -36,5 +36,5 @@ public protocol PageModule: Sendable {
     static var shortcutKeys: [String] { get }
     /// Kontextová viditelnost v docku.
     static func isVisible(in context: PageContext) -> Bool
-    static func makeView(host: any PageHost) -> AnyView
+    @MainActor static func makeView(host: any PageHost) -> AnyView
 }

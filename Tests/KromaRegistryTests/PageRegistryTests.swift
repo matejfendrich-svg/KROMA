@@ -8,7 +8,7 @@ struct StubPage: PageModule {
     static let icon = "circle"
     static let shortcutKeys = ["9"]
     static func isVisible(in context: PageContext) -> Bool { true }
-    static func makeView(host: any PageHost) -> AnyView { AnyView(Text("stub")) }
+    @MainActor static func makeView(host: any PageHost) -> AnyView { AnyView(Text("stub")) }
 }
 
 struct StubEditPage: PageModule {
@@ -19,7 +19,7 @@ struct StubEditPage: PageModule {
     static func isVisible(in context: PageContext) -> Bool {
         context.hasVideo || context.hasSequence || context.mode == .resolve
     }
-    static func makeView(host: any PageHost) -> AnyView { AnyView(Text("edit")) }
+    @MainActor static func makeView(host: any PageHost) -> AnyView { AnyView(Text("edit")) }
 }
 
 @Test func registrationOrderIsDockOrder() {

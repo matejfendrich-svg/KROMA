@@ -15,7 +15,7 @@ public struct EditPage: PageModule {
         context.hasVideo || context.hasSequence || context.mode == .resolve
     }
 
-    public static func makeView(host: any PageHost) -> AnyView {
+    @MainActor public static func makeView(host: any PageHost) -> AnyView {
         AnyView(PagePlaceholderView(title: title, detail: "M6/M7 – timeline, sekvence fotek, režim Resolve"))
     }
 }

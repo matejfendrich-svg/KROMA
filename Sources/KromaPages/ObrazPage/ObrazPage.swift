@@ -12,7 +12,7 @@ public struct ObrazPage: PageModule {
 
     public static func isVisible(in context: PageContext) -> Bool { true }
 
-    public static func makeView(host: any PageHost) -> AnyView {
+    @MainActor public static func makeView(host: any PageHost) -> AnyView {
         AnyView(PagePlaceholderView(title: title, detail: "M2 – expozice, jas, kontrast, stíny, světlá jako uzly grafu"))
     }
 }
