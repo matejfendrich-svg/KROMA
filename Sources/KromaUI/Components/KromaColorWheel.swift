@@ -35,11 +35,11 @@ public struct KromaColorWheel: View {
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        let x = (value.location.x - size / 2) / (size / 2)
-                        let y = (value.location.y - size / 2) / (size / 2)
+                        let normX = (value.location.x - size / 2) / (size / 2)
+                        let normY = (value.location.y - size / 2) / (size / 2)
                         position = CGPoint(
-                            x: min(1, max(-1, x)),
-                            y: min(1, max(-1, y))
+                            x: min(1, max(-1, normX)),
+                            y: min(1, max(-1, normY))
                         )
                     }
             )

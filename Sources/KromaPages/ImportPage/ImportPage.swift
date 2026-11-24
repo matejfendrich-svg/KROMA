@@ -159,12 +159,18 @@ private struct ImportPageView: View {
         .clipShape(RoundedRectangle(cornerRadius: 6))
         .overlay(
             RoundedRectangle(cornerRadius: 6)
-                .stroke(selected ? Theme.shared.accentBase : rejected ? DesignTokens.Palette.textSecondary : DesignTokens.Palette.separator, lineWidth: selected || rejected ? 2 : 1)
+                .stroke(tileBorder(selected: selected, rejected: rejected), lineWidth: selected || rejected ? 2 : 1)
         )
         .opacity(rejected ? 0.35 : 1)
         .onTapGesture {
             state.toggleSelected(index)
         }
+    }
+
+    private func tileBorder(selected: Bool, rejected: Bool) -> Color {
+        if selected { return Theme.shared.accentBase }
+        if rejected { return DesignTokens.Palette.textSecondary }
+        return DesignTokens.Palette.separator
     }
 
     private func mockPhoto(hue: Double) -> some View {
