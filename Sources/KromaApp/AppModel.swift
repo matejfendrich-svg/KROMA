@@ -52,6 +52,9 @@ public enum ThermalIndicator: Sendable {
 @Observable
 @MainActor
 public final class AppModel: PageHost {
+    /// Sdílená instance aplikace (bez @State, aby build fungoval i jen s Command Line Tools).
+    public static let shared = AppModel()
+
     public let theme = Theme()
     public let settings = SettingsStore()
     public let projectStore = ProjectStore()
