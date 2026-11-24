@@ -8,29 +8,29 @@ public struct KromaGridBackground: View {
         Canvas { context, size in
             let step = DesignTokens.gridSpacing
             let line = Color.white.opacity(0.03)
-            var x: CGFloat = 0
-            while x <= size.width {
+            var offsetX: CGFloat = 0
+            while offsetX <= size.width {
                 context.stroke(
                     Path { path in
-                        path.move(to: CGPoint(x: x, y: 0))
-                        path.addLine(to: CGPoint(x: x, y: size.height))
+                        path.move(to: CGPoint(x: offsetX, y: 0))
+                        path.addLine(to: CGPoint(x: offsetX, y: size.height))
                     },
                     with: .color(line),
                     lineWidth: 1
                 )
-                x += step
+                offsetX += step
             }
-            var y: CGFloat = 0
-            while y <= size.height {
+            var offsetY: CGFloat = 0
+            while offsetY <= size.height {
                 context.stroke(
                     Path { path in
-                        path.move(to: CGPoint(x: 0, y: y))
-                        path.addLine(to: CGPoint(x: size.width, y: y))
+                        path.move(to: CGPoint(x: 0, y: offsetY))
+                        path.addLine(to: CGPoint(x: size.width, y: offsetY))
                     },
                     with: .color(line),
                     lineWidth: 1
                 )
-                y += step
+                offsetY += step
             }
         }
     }
