@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import KromaRegistry
 
 /// Načítá a ukládá projektový balíček .kroma (project.json + graph.json + cache/).
 /// Automatické ukládání s odstupem 1 s; verzování řeší macOS Versions.
