@@ -1,0 +1,4 @@
+--indent 4
+--maxwidth 160
+--stripunusedargs closure-only
+--extensionacl onblanklines
