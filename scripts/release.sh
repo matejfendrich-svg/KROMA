@@ -34,6 +34,8 @@ trap 'rm -rf "${STAGE}"' EXIT
 
 APP_DIR="${STAGE}/${APP_NAME}.app"
 mkdir -p "${APP_DIR}/Contents/MacOS" "${APP_DIR}/Contents/Resources"
+# Odkaz na Applications, aby se v okně DMG dalo přetáhnout do Applications.
+ln -s /Applications "${STAGE}/Applications"
 
 cp "${BINARY}" "${APP_DIR}/Contents/MacOS/${APP_NAME}"
 sed -e "s/__VERSION__/${VERSION}/g" Resources/AppInfo.plist > "${APP_DIR}/Contents/Info.plist"

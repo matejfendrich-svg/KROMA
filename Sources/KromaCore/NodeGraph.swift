@@ -1,5 +1,5 @@
+import CryptoKit
 import Foundation
-import Crypto
 import KromaRegistry
 
 /// Maska výběru připojená k uzlu (qualifier, hloubka, tvar...).
