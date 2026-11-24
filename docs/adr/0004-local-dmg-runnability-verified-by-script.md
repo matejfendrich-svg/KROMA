@@ -7,7 +7,7 @@
 Autor vyžaduje (specifikace kapitola 11, bod 8 a kapitola 12, bod 6): DMG sestavený lokálně na jeho MacBooku s Apple Silicon bez certifikátu (ad-hoc podpis) musí jít otevřít bez varování Gatekeeperu a bez ručního zásahu do zabezpečení; aplikace po přetažení do Applications musí fungovat. Tuto vlastnost musí CLI agent ověřit u každého milníku, kde vzniká spustitelná aplikace.
 
 ## Rozhodnutí
-Kontrola je součástí `scripts/test-release.sh`, nikoliv ručního postupu. Skript ověří: obsah DMG (Kroma.app + odkaz na Applications), platnost podpisu (`codesign --verify --deep --strict`), přijetí Gatekeeperem (`spctl --assess`, absence `com.apple.quarantine`) a – když běží WindowServer – simulaci instalace se spuštěním aplikace. Skript běží v CI (krok po `swift test`) a lokálně přes `Kroma.command` po každém release.
+Kontrola je součástí `scripts/test-release.sh`, nikoliv ručního postupu. Skript ověří: obsah DMG (Kroma.app + odkaz na Applications), platnost podpisu (`codesign --verify --deep --strict`), absenci karantény `com.apple.quarantine` (právě ta způsobuje varování Gatekeeperu; `spctl --assess` se vypisuje jen informativně, protože u ad-hoc podpisu hlásí rejected) a – když běží WindowServer – simulaci instalace se spuštěním aplikace, která musí běžet. Skript běží v CI (krok po `swift test`) a lokálně přes `Kroma.command` po každém release.
 
 ## Důsledky
 - Každý milník se spustitelnou aplikací končí během `scripts/test-release.sh`.
