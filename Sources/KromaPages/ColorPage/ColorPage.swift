@@ -39,7 +39,7 @@ public struct ColorPage: PageModule {
 }
 
 private struct ColorPageView: View {
-    let state: ColorPageState
+    @Bindable var state: ColorPageState
 
     var body: some View {
         VStack(spacing: 0) {

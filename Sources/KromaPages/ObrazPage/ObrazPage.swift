@@ -31,7 +31,7 @@ public struct ObrazPage: PageModule {
 }
 
 private struct ObrazPageView: View {
-    let state: ObrazPageState
+    @Bindable var state: ObrazPageState
 
     var body: some View {
         HStack(spacing: 0) {
