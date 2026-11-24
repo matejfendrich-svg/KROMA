@@ -42,6 +42,7 @@ import KromaCore
     try FileManager.default.createDirectory(at: package, withIntermediateDirectories: true)
 
     let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .iso8601
     try encoder.encode(ProjectEnvelope(schemaVersion: KromaSchema.currentVersion + 1, name: "New"))
         .write(to: package.appendingPathComponent("project.json"))
     try encoder.encode(GraphFile())
