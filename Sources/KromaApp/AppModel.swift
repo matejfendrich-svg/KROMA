@@ -32,9 +32,9 @@ public enum ThermalIndicator: Sendable {
 
     public var color: Color {
         switch self {
-        case .nominal, .fair: return DesignTokens.Palette.accentGreenHover
-        case .serious: return .orange
-        case .critical: return DesignTokens.Palette.accentRed
+        case .nominal, .fair: return DesignTokens.Palette.statusGreen
+        case .serious: return DesignTokens.Palette.statusOrange
+        case .critical: return DesignTokens.Palette.statusRed
         }
     }
 

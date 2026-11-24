@@ -11,15 +11,15 @@ public struct PagePlaceholderView: View {
     }
 
     public var body: some View {
-        VStack(spacing: 8) {
-            Text(title)
-                .font(.system(size: 20, weight: .semibold))
+        VStack(spacing: 10) {
+            Text(title.uppercased())
+                .font(.system(size: 20, weight: .bold))
+                .tracking(3)
                 .foregroundStyle(DesignTokens.Palette.textPrimary)
             Text(detail)
-                .font(.system(size: 12))
+                .font(.system(size: 12, design: .monospaced))
                 .foregroundStyle(DesignTokens.Palette.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DesignTokens.Palette.base)
     }
 }

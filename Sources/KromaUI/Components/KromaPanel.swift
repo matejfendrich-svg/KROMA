@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Panel s výchozím vzhledem: pozadí bg.panel, radius 4 pt, tenký oddělovač 1 pt.
+/// Karta ve stylu FR_APP: bg surface, 1px border, radius 12 px.
 public struct KromaPanel<Content: View>: View {
     public let content: Content
 
@@ -11,7 +11,11 @@ public struct KromaPanel<Content: View>: View {
     public var body: some View {
         content
             .background(DesignTokens.Palette.panel)
-            .clipShape(RoundedRectangle(cornerRadius: DesignTokens.panelCornerRadius))
+            .overlay(
+                RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius)
+                    .stroke(DesignTokens.Palette.separator, lineWidth: DesignTokens.separatorWidth)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius))
     }
 }
 

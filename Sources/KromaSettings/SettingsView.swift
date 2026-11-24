@@ -69,7 +69,7 @@ public struct SettingsView: View {
                     set: { newValue in store.update { $0.accent = newValue } }
                 )) {
                     ForEach(AccentPreset.allCases) { preset in
-                        Text(preset.rawValue.capitalized).tag(preset)
+                        Text(preset.displayName).tag(preset)
                     }
                 }
                 TextField("Vlastní hex barva", text: Binding(

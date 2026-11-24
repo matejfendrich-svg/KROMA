@@ -2,7 +2,7 @@ import KromaSettings
 import KromaUI
 import SwiftUI
 
-/// Hlavní okno: hlavička nahoře, vlevo seznam médií, uprostřed stránka,
+/// Hlavní okno: hlavička nahoře, vlevo seznam médií, uprostřed stránka na bg-grid,
 /// vpravo inspektor, dole dock stránek.
 public struct MainWindowView: View {
     @Bindable public var model: AppModel
@@ -18,18 +18,21 @@ public struct MainWindowView: View {
             HStack(spacing: 0) {
                 if model.showMediaPanel {
                     MediaPanelView(model: model)
-                        .frame(width: 240)
+                        .frame(width: DesignTokens.sidebarWidth)
                     Divider().background(DesignTokens.Palette.separator)
                 }
                 VStack(spacing: 0) {
-                    currentPage
+                    ZStack {
+                        KromaGridBackground()
+                        currentPage
+                    }
                     Divider().background(DesignTokens.Palette.separator)
                     DockView(model: model)
                 }
                 if model.showInspector {
                     Divider().background(DesignTokens.Palette.separator)
                     InspectorView(model: model)
-                        .frame(width: 280)
+                        .frame(width: DesignTokens.inspectorWidth)
                 }
             }
         }

@@ -2,8 +2,8 @@ import SwiftUI
 import KromaRegistry
 import KromaUI
 
-/// Dolní dock ve stylu DaVinci Resolve: ikony s popisky, aktivní stránka
-/// podbarvená akcentem s underline kurzorem, výška 56 pt, popisek 10 pt.
+/// Dolní dock ve stylu DaVinci Resolve přestylizovaný podle FR_APP (mono):
+/// ikony s popisky, aktivní stránka bílá s bílým underline, výška 56 pt, popisek 10 pt.
 public struct DockView: View {
     @Bindable public var model: AppModel
 
@@ -27,7 +27,13 @@ public struct DockView: View {
                 model.showSettings = true
             } label: {
                 Image(systemName: "gearshape")
+                    .font(.system(size: 15))
                     .foregroundStyle(DesignTokens.Palette.textSecondary)
+                    .frame(width: 40, height: 40)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius)
+                            .stroke(DesignTokens.Palette.separator, lineWidth: 1)
+                    )
             }
             .buttonStyle(.plain)
             .help("Nastavení")

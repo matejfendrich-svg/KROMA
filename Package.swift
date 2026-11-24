@@ -61,5 +61,6 @@ let package = Package(
         // Testy.
         .testTarget(name: "KromaCoreTests", dependencies: ["KromaCore", "KromaRegistry"], path: "Tests/KromaCoreTests"),
         .testTarget(name: "KromaRegistryTests", dependencies: ["KromaRegistry"], path: "Tests/KromaRegistryTests"),
+        .testTarget(name: "KromaUITests", dependencies: ["KromaUI"], path: "Tests/KromaUITests"),
     ]
 )

@@ -23,7 +23,7 @@ public enum EkoMode: String, Codable, Sendable, CaseIterable {
 /// Uživatelská nastavení aplikace, ukládaná průběžně a platná okamžitě.
 public struct AppSettings: Codable, Sendable {
     public var defaultWorkMode: WorkMode = .gallery
-    public var accent: AccentPreset = .green
+    public var accent: AccentPreset = .mono
     public var customAccentHex: String?
     public var compactControls: Bool = false
     public var showTimelineFilmstrip: Bool = true

@@ -12,19 +12,20 @@ public struct HeaderView: View {
 
     public var body: some View {
         HStack(spacing: 12) {
-            Text(model.projectStore.project?.name ?? "Kroma")
-                .font(.system(size: 12, weight: .semibold))
+            Text((model.projectStore.project?.name ?? "Kroma").uppercased())
+                .font(.system(size: 12, weight: .bold))
+                .tracking(1.7)
                 .foregroundStyle(DesignTokens.Palette.textPrimary)
             if let path = model.projectStore.packageURL?.path {
                 Text(path)
-                    .font(.system(size: 11, design: .monospaced))
-                    .foregroundStyle(DesignTokens.Palette.textSecondary)
+                    .font(.system(size: 10, design: .monospaced))
+                    .foregroundStyle(DesignTokens.Palette.textFaint)
                     .lineLimit(1)
                     .truncationMode(.middle)
             }
             Text("Cache: —")
-                .font(.system(size: 11))
-                .foregroundStyle(DesignTokens.Palette.textSecondary)
+                .font(.system(size: 10, design: .monospaced))
+                .foregroundStyle(DesignTokens.Palette.textFaint)
             Circle()
                 .fill(model.thermalState.color)
                 .frame(width: 8, height: 8)
@@ -34,6 +35,7 @@ public struct HeaderView: View {
                 NSApp.windows.first?.toggleFullScreen(nil)
             } label: {
                 Image(systemName: "arrow.up.left.and.arrow.down.right")
+                    .font(.system(size: 14))
                     .foregroundStyle(DesignTokens.Palette.textSecondary)
             }
             .buttonStyle(.plain)
