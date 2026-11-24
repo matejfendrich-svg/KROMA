@@ -22,7 +22,7 @@ public struct PageContext: Sendable {
 /// Hostitelské prostředí stránky. Implementuje ho AppModel v KromaApp,
 /// aby stránky nezávisely na konkrétní aplikaci.
 public protocol PageHost: AnyObject, Sendable {
-    var pageContext: PageContext { get }
+    @MainActor var pageContext: PageContext { get }
 }
 
 /// Modul stránky. Každá stránka je samostatný SwiftPM target implementující tento protokol:
