@@ -55,14 +55,14 @@ public struct KromaButton: View {
 
     private var foreground: Color {
         switch variant {
-        case .primary: return DesignTokens.Palette.onAccent
+        case .primary: return Theme.shared.onAccent
         case .secondary, .ghost: return DesignTokens.Palette.textPrimary
         }
     }
 
     private var background: Color {
         switch variant {
-        case .primary: return DesignTokens.Palette.accent
+        case .primary: return Theme.shared.accentBase
         case .secondary, .ghost: return .clear
         }
     }
@@ -93,7 +93,7 @@ public struct KromaBadge: View {
     public var body: some View {
         HStack(spacing: 6) {
             Circle()
-                .fill(active ? DesignTokens.Palette.accent : DesignTokens.Palette.textFaint)
+                .fill(active ? Theme.shared.accentBase : DesignTokens.Palette.faint)
                 .frame(width: 6, height: 6)
                 .shadow(color: active ? Color.white.opacity(0.9) : .clear, radius: 8)
             Text(text)
@@ -128,10 +128,10 @@ public struct KromaSegmented<Value: Hashable>: View {
                     Text(option.label.uppercased())
                         .font(.system(size: 11, weight: .medium))
                         .tracking(1.2)
-                        .foregroundStyle(selection == option.value ? DesignTokens.Palette.onAccent : DesignTokens.Palette.textSecondary)
+                        .foregroundStyle(selection == option.value ? Theme.shared.onAccent : DesignTokens.Palette.textSecondary)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(selection == option.value ? DesignTokens.Palette.accent : Color.clear)
+                        .background(selection == option.value ? Theme.shared.accentBase : Color.clear)
                         .clipShape(RoundedRectangle(cornerRadius: 9))
                 }
                 .buttonStyle(.plain)
@@ -167,10 +167,10 @@ public struct KromaToggle: View {
                 Spacer()
                 ZStack {
                     Capsule()
-                        .fill(isOn ? DesignTokens.Palette.accent : DesignTokens.Palette.elevated)
+                        .fill(isOn ? Theme.shared.accentBase : DesignTokens.Palette.elevated)
                         .overlay(Capsule().stroke(DesignTokens.Palette.separatorStrong, lineWidth: 1))
                     Circle()
-                        .fill(isOn ? DesignTokens.Palette.onAccent : DesignTokens.Palette.textFaint)
+                        .fill(isOn ? Theme.shared.onAccent : DesignTokens.Palette.faint)
                         .frame(width: 16, height: 16)
                         .offset(x: isOn ? 10 : -10)
                 }

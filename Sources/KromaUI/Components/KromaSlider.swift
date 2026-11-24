@@ -26,7 +26,7 @@ public struct KromaSlider: View {
                 .foregroundStyle(DesignTokens.Palette.textSecondary)
                 .frame(width: 72, alignment: .leading)
             Slider(value: $value, in: range, step: step)
-                .tint(DesignTokens.Palette.accent)
+                .tint(Theme.shared.accentBase)
                 .onTapGesture(count: 2) {
                     value = defaultValue
                 }

@@ -55,7 +55,7 @@ public final class AppModel: PageHost {
     /// Sdílená instance aplikace (bez @State, aby build fungoval i jen s Command Line Tools).
     public static let shared = AppModel()
 
-    public let theme = Theme()
+    public let theme = Theme.shared
     public let settings = SettingsStore()
     public let projectStore = ProjectStore()
 
@@ -64,6 +64,9 @@ public final class AppModel: PageHost {
     public var showInspector: Bool = true
     public var showSettings: Bool = false
     public var thermalState: ThermalIndicator = .nominal
+    /// Šířky bočních panelů – mění se přetažením za vnitřní hranu, dvojklik resetuje (prototyp).
+    public var leftPanelWidth: CGFloat = DesignTokens.sidebarDefaultWidth
+    public var inspectorPanelWidth: CGFloat = DesignTokens.inspectorDefaultWidth
 
     public init() {
         KromaFX.registerDefaultEffects()

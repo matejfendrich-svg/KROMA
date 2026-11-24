@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Dočasný obsah stránky v M0 – až bude stránka implementovaná, tento view zmizí.
+/// Dočasný obsah stránky – až bude stránka implementovaná, tento view zmizí.
 public struct PagePlaceholderView: View {
     public let title: String
     public let detail: String

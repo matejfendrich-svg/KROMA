@@ -12,44 +12,56 @@ private func hexString(_ color: NSColor) -> String {
     )
 }
 
-@Test func paletteMatchesFRAppMonoTokens() {
-    #expect(hexString(NSColor(DesignTokens.Palette.base)) == "#000000")
-    #expect(hexString(NSColor(DesignTokens.Palette.panel)) == "#0A0A0A")
-    #expect(hexString(NSColor(DesignTokens.Palette.elevated)) == "#141414")
-    #expect(hexString(NSColor(DesignTokens.Palette.separator)) == "#262626")
-    #expect(hexString(NSColor(DesignTokens.Palette.separatorStrong)) == "#3D3D3D")
-    #expect(hexString(NSColor(DesignTokens.Palette.textPrimary)) == "#FFFFFF")
-    #expect(hexString(NSColor(DesignTokens.Palette.textSecondary)) == "#A3A3A3")
-    #expect(hexString(NSColor(DesignTokens.Palette.textFaint)) == "#525252")
-    #expect(hexString(NSColor(DesignTokens.Palette.accent)) == "#FFFFFF")
+@Test func paletteMatchesPrototypeTokens() {
+    #expect(hexString(NSColor(DesignTokens.Palette.base)) == "#0D0E0F")
+    #expect(hexString(NSColor(DesignTokens.Palette.deep)) == "#08090A")
+    #expect(hexString(NSColor(DesignTokens.Palette.headerBg)) == "#0A0B0C")
+    #expect(hexString(NSColor(DesignTokens.Palette.panel)) == "#151719")
+    #expect(hexString(NSColor(DesignTokens.Palette.elevated)) == "#1C1F22")
+    #expect(hexString(NSColor(DesignTokens.Palette.separator)) == "#26282B")
+    #expect(hexString(NSColor(DesignTokens.Palette.textPrimary)) == "#F4F4F2")
+    #expect(hexString(NSColor(DesignTokens.Palette.textSecondary)) == "#A6A8AA")
+    #expect(hexString(NSColor(DesignTokens.Palette.faint)) == "#3A3E44")
+    #expect(hexString(NSColor(DesignTokens.Palette.onAccent)) == "#0A0A0B")
 }
 
-@Test func paletteIsMonochrome() {
+@Test func paletteIsNearMonochrome() {
     let colors: [NSColor] = [
         NSColor(DesignTokens.Palette.base),
+        NSColor(DesignTokens.Palette.deep),
+        NSColor(DesignTokens.Palette.headerBg),
         NSColor(DesignTokens.Palette.panel),
         NSColor(DesignTokens.Palette.elevated),
         NSColor(DesignTokens.Palette.separator),
-        NSColor(DesignTokens.Palette.separatorStrong),
         NSColor(DesignTokens.Palette.textPrimary),
         NSColor(DesignTokens.Palette.textSecondary),
-        NSColor(DesignTokens.Palette.textFaint),
-        NSColor(DesignTokens.Palette.accent),
+        NSColor(DesignTokens.Palette.faint),
+        NSColor(DesignTokens.Palette.onAccent),
+        NSColor(AccentPreset.seda.base),
+        NSColor(AccentPreset.bila.base),
     ]
     for color in colors {
-        #expect(abs(color.redComponent - color.greenComponent) < 0.02)
-        #expect(abs(color.greenComponent - color.blueComponent) < 0.02)
+        #expect(abs(color.redComponent - color.greenComponent) < 0.05)
+        #expect(abs(color.greenComponent - color.blueComponent) < 0.05)
     }
 }
 
-@Test func colorHexParser() {
-    let parsed = NSColor(Color(hex: "#2AA06B"))
-    #expect(abs(parsed.redComponent - 0x2A / 255.0) < 0.01)
-    #expect(abs(parsed.greenComponent - 0xA0 / 255.0) < 0.01)
-    #expect(abs(parsed.blueComponent - 0x6B / 255.0) < 0.01)
+@Test func labelPaletteHasEightGraySteps() {
+    #expect(DesignTokens.labelPalette.count == 8)
+    let first = NSColor(DesignTokens.labelPalette[0])
+    let last = NSColor(DesignTokens.labelPalette[7])
+    #expect(first.redComponent < last.redComponent)
 }
 
-@Test func defaultAccentIsMono() {
-    #expect(AccentPreset.mono.base == DesignTokens.Palette.accent)
-    #expect(AccentPreset.mono.onAccent == DesignTokens.Palette.onAccent)
+@Test func colorHexParser() {
+    let parsed = NSColor(Color(hex: "#C9CED4"))
+    #expect(abs(parsed.redComponent - 0xC9 / 255.0) < 0.01)
+    #expect(abs(parsed.greenComponent - 0xCE / 255.0) < 0.01)
+    #expect(abs(parsed.blueComponent - 0xD4 / 255.0) < 0.01)
+}
+
+@Test func defaultAccentIsSeda() {
+    #expect(AccentPreset.seda.base == Color(hex: "#C9CED4"))
+    #expect(AccentPreset.bila.base == Color(hex: "#FFFFFF"))
+    #expect(AccentPreset.seda.onAccent == DesignTokens.Palette.onAccent)
 }

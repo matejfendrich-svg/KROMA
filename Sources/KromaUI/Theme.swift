@@ -2,65 +2,46 @@ import Foundation
 import Observation
 import SwiftUI
 
-/// Předvolby dominantní barvy aplikace (nastavení, sekce Pracovní prostředí).
-/// Výchozí je mono (bílý akcent na černé) podle designu FR_APP – viz ADR 0005.
+/// Předvolba akcentu rozhraní podle prototypu: moderní šedá (výchozí) nebo čistá bílá.
+/// Monochromní UI – barevné jsou výhradně balanční kola (ADR 0006). Vlastní hex zůstává možný (spec 8.1).
 public enum AccentPreset: String, Codable, Sendable, CaseIterable, Identifiable {
-    case mono
-    case green
-    case red
-    case blue
-    case graphite
+    case seda
+    case bila
 
     public var id: String { rawValue }
 
     public var displayName: String {
         switch self {
-        case .mono: return "Mono"
-        case .green: return "Zelená"
-        case .red: return "Červená"
-        case .blue: return "Modrá"
-        case .graphite: return "Grafitová"
+        case .seda: return "Moderní šedá"
+        case .bila: return "Čistá bílá"
         }
     }
 
     public var base: Color {
         switch self {
-        case .mono: return DesignTokens.Palette.accent
-        case .green: return Color(hex: "#185238")
-        case .red: return Color(hex: "#D9483B")
-        case .blue: return Color(hex: "#2F6FB5")
-        case .graphite: return Color(hex: "#3A3D40")
+        case .seda: return Color(hex: "#C9CED4")
+        case .bila: return Color(hex: "#FFFFFF")
         }
     }
 
-    public var hover: Color {
-        switch self {
-        case .mono: return DesignTokens.Palette.accent
-        case .green: return Color(hex: "#2AA06B")
-        case .red: return Color(hex: "#E86A5E")
-        case .blue: return Color(hex: "#5B93D6")
-        case .graphite: return Color(hex: "#5C6065")
-        }
-    }
+    public var hover: Color { base }
 
-    public var onAccent: Color {
-        switch self {
-        case .mono: return DesignTokens.Palette.onAccent
-        default: return DesignTokens.Palette.textPrimary
-        }
-    }
+    public var onAccent: Color { DesignTokens.Palette.onAccent }
 }
 
 /// Aktivní téma aplikace. Uživatelsky konfigurovatelné přes nastavení.
 @Observable
 public final class Theme {
-    public var accent: AccentPreset = .mono
+    /// Sdílené téma aplikace (jedno okno; stránky k němu přistupují přes Theme.shared).
+    public static let shared = Theme()
+
+    public var accent: AccentPreset = .seda
     public var customAccentHex: String?
     public var darkAppearance: Bool = true
 
     public init() {}
 
-    /// Aktivní základní akcent (vlastní hex má přednost před předvolbou).
+    /// Aktivní akcent (vlastní hex má přednost před předvolbou).
     public var accentBase: Color {
         if let hex = customAccentHex, !hex.isEmpty { return Color(hex: hex) }
         return accent.base

@@ -16,6 +16,6 @@ public struct EditPage: PageModule {
     }
 
     @MainActor public static func makeView(host: any PageHost) -> AnyView {
-        AnyView(PagePlaceholderView(title: title, detail: "M6/M7 – timeline, sekvence fotek, režim Resolve"))
+        AnyView(PagePlaceholderView(title: title, detail: "M6/M7 – timeline: stopy FOTO/ADJ/TEXT, razor Cmd+B, snapping, J/K/L, I/O"))
     }
 }

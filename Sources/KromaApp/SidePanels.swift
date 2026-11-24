@@ -11,22 +11,23 @@ public struct MediaPanelView: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            KromaLabel("Média")
+            KromaLabel("Složka · projekt")
                 .padding(8)
             Divider().background(DesignTokens.Palette.separator)
             if let media = model.projectStore.project?.media, !media.isEmpty {
                 List(media) { item in
                     HStack(spacing: 6) {
                         Image(systemName: item.kind == .video ? "film" : "photo")
+                            .font(.system(size: 11))
                             .foregroundStyle(DesignTokens.Palette.textSecondary)
                         Text(item.url.lastPathComponent)
-                            .font(.system(size: 11))
+                            .font(.system(size: 10))
                             .lineLimit(1)
                             .truncationMode(.middle)
                         if item.rating > 0 {
                             Text(String(repeating: "★", count: item.rating))
                                 .font(.system(size: 9))
-                                .foregroundStyle(DesignTokens.Palette.accent)
+                                .foregroundStyle(Theme.shared.accentBase)
                         }
                     }
                 }
@@ -34,8 +35,8 @@ public struct MediaPanelView: View {
                 .scrollContentBackground(.hidden)
                 .background(DesignTokens.Palette.panel)
             } else {
-                Text("Žádná média – M1 přidá import ze složky.")
-                    .font(.system(size: 11, design: .monospaced))
+                Text("Žádná média – stránka Import (1) přidá složku.")
+                    .font(.system(size: 10, design: .monospaced))
                     .foregroundStyle(DesignTokens.Palette.textSecondary)
                     .padding(8)
                 Spacer()
@@ -62,8 +63,8 @@ public struct InspectorView: View {
                     .tracking(1.6)
                     .foregroundStyle(DesignTokens.Palette.textPrimary)
             }
-            Text("M2+ zde budou posuvníky parametrů generované ze schématu efektů.")
-                .font(.system(size: 11, design: .monospaced))
+            Text("Posuvníky parametrů se generují ze schématu efektů (M2+).")
+                .font(.system(size: 10, design: .monospaced))
                 .foregroundStyle(DesignTokens.Palette.textSecondary)
             Spacer()
         }
