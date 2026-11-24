@@ -46,14 +46,14 @@ public struct SettingsView: View {
             case .workspace:
                 Picker("Výchozí režim nových projektů", selection: Binding(
                     get: { store.settings.defaultWorkMode },
-                    set: { store.update { $0.defaultWorkMode = $0 } }
+                    set: { newValue in store.update { $0.defaultWorkMode = newValue } }
                 )) {
                     Text("Galerie").tag(WorkMode.gallery)
                     Text("Resolve").tag(WorkMode.resolve)
                 }
                 Picker("Dominantní barva", selection: Binding(
                     get: { store.settings.accent },
-                    set: { store.update { $0.accent = $0 } }
+                    set: { newValue in store.update { $0.accent = newValue } }
                 )) {
                     ForEach(AccentPreset.allCases) { preset in
                         Text(preset.rawValue.capitalized).tag(preset)
@@ -61,16 +61,16 @@ public struct SettingsView: View {
                 }
                 TextField("Vlastní hex barva", text: Binding(
                     get: { store.settings.customAccentHex ?? "" },
-                    set: { store.update { $0.customAccentHex = $0.isEmpty ? nil : $0 } }
+                    set: { newValue in store.update { $0.customAccentHex = newValue.isEmpty ? nil : newValue } }
                 ))
                 Toggle("Mini náhled timeline", isOn: Binding(
                     get: { store.settings.showTimelineFilmstrip },
-                    set: { store.update { $0.showTimelineFilmstrip = $0 } }
+                    set: { newValue in store.update { $0.showTimelineFilmstrip = newValue } }
                 ))
             case .performance:
                 Picker("Eko režim", selection: Binding(
                     get: { store.settings.ekoMode },
-                    set: { store.update { $0.ekoMode = $0 } }
+                    set: { newValue in store.update { $0.ekoMode = newValue } }
                 )) {
                     Text("Nikdy").tag(EkoMode.never)
                     Text("Jen na baterii").tag(EkoMode.onBattery)
@@ -79,11 +79,11 @@ public struct SettingsView: View {
             case .project:
                 Toggle("Kopírovat originály do knihovny", isOn: Binding(
                     get: { store.settings.copyOriginalsIntoLibrary },
-                    set: { store.update { $0.copyOriginalsIntoLibrary = $0 } }
+                    set: { newValue in store.update { $0.copyOriginalsIntoLibrary = newValue } }
                 ))
                 Toggle("Zapisovat XML sidecar (XMP)", isOn: Binding(
                     get: { store.settings.writeXMPSidecar },
-                    set: { store.update { $0.writeXMPSidecar = $0 } }
+                    set: { newValue in store.update { $0.writeXMPSidecar = newValue } }
                 ))
             case .export, .shortcuts, .advanced:
                 Text("Připraveno v dalším milníku.")
