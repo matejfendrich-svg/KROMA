@@ -22,6 +22,8 @@ Požadavky: Xcode Command Line Tools (stačí `xcode-select --install`), plné X
 scripts/release.sh   # build + podpis (ad-hoc nebo Developer ID) + DMG
 ```
 
+Na vlastním MacBooku stačí jednou dvojkliknout na soubor **`Kroma.command`** v kořeni repozitáře: sestaví aplikaci a hotové `Kroma-*.dmg` položí na Plochu. DMG pak otevřeš normálně a přetáhneš Kromu do Applications (lokálně sestavené DMG nevyžaduje certifikát a nevyvolá varování Gatekeeperu).
+
 Produkční build s notarizací přes proměnné `DEVELOPER_ID` a `NOTARIZE_KEYCHAIN_PROFILE` (viz hlavička skriptu).
 
 ## Struktura
