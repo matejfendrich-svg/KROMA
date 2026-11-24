@@ -370,7 +370,7 @@ Distribuce přes DMG (závazné rozhodnutí autora):
 5. Celý release je jediný skript v repozitáři `scripts/release.sh`: sestavení přes Swift Package Manager, přeložení jader Metal, podpis, notarizace a zabalení DMG. Skript musí fungovat i lokálně s Xcode Command Line Tools, plné Xcode se k sestavení aplikace ani DMG nevyžaduje.
 6. Soubor `.xcodeproj` ani `.xcworkspace` se v repozitáři nikdy nevytváří. CLI agent buduje výhradně přes manifest `Package.swift`.
 7. Fáze před pořízením certifikátu: dokud není certifikát Developer ID k dispozici, release skript vytváří DMG bez notarizace (ad-hoc podpis), určený pouze pro autora. Po přidání klíčů do CI jako tajných údajů produkční build podepisuje a notarizuje automaticky.
-8. Lokální spuštění na autorově MacBooku je požadavek první třídy: DMG sestavený přímo na autorově počítači se na tomtéž počítači spouští zcela normálně, bez certifikátu, bez poplatku a bez výstrahy Gatekeeperu, protože soubor nevzniká stažením z internetu. Celý vývoj a testování proto nikdy nezávisí na pořízení certifikátu Apple Developer; ten je potřeba až pro veřejné zveřejnění.
+8. Lokální spustitelnost (požadavek autora): DMG sestavený lokálně na autorově MacBooku s Apple Silicon musí být spustitelný bez certifikátu, bez varování Gatekeeperu a bez jakéhokoliv ručního zásahu do nastavení zabezpečení. Uživatelský postup: otevřít DMG, přetáhnout aplikaci do složky Applications, spustit. Tuto vlastnost CLI agent ověří u každého milníku, ve kterém vzniká spustitelná aplikace.
 
 Technologický stack:
 
@@ -396,6 +396,7 @@ kroma/
   Package.swift               # jeden manifest, cíle níže
   scripts/
     release.sh                # sestavení, podpis, notarizace, vytvoření DMG
+    test-release.sh           # kontrola spustitelnosti lokálního DMG bez varování
   Sources/
     KromaApp/                 # vstupní bod, okno, dock, routování stránek
     KromaUI/                  # design system, tokeny, komponenty, scopes
@@ -431,6 +432,7 @@ kroma/
 3. Testy odpovědi: automatizovaný průběh interakce s kontrolou, že žádný snímek update náhledu nepřesáhne 100 ms na referenčním zařízení.
 4. Testy exportu: export zkušebního média, kontrola metadat výsledného souboru (codec, datový tok, barevný prostor, PPI).
 5. Akceptační kritéria celé aplikace: na MacBooku Air M1 s projektem 50 RAW souborů je otevření projektu do 3 sekund, interakce na posuvníku expozice pod 16 ms, export 50 JPEG v plném rozlišení do 60 sekund.
+6. Akceptační kritérium distribuce: DMG sestavený release skriptem bez certifikátu (ad-hoc podpis) se na autorově MacBooku otevře bez varování Gatekeeperu a aplikace po přetažení do složky Applications funguje. Kontrola tohoto kritéria je součástí skriptu `scripts/test-release.sh`, nikoliv ručního postupu.
 
 ## 13. Roadmapa a milníky
 
@@ -438,7 +440,7 @@ Milníky jsou seřazeny tak, aby po každém byl produkt použitelný a testovat
 
 | Milník | Obsah | Kritérium přijetí |
 |--------|-------|-------------------|
-| M0 | Kostra aplikace: okno, dock, routování stránek, design system s tokeny, obálka nastavení, CI s lintem a testy | Aplikace se spustí lokálně bez jakéhokoliv varování, přepíná prázdné stránky, barvy odpovídají design systému |
+| M0 | Kostra aplikace: okno, dock, routování stránek, design system s tokeny, obálka nastavení, CI s lintem a testy | Aplikace se spustí, přepíná prázdné stránky, barvy odpovídají design systému |
 | M1 | Import: výběr složky, mřížka náhledů, cache thumbnail, culling hvězdami a štítky, výběr, import do projektu, FSEvents | Otevření složky se 100 RAW do 5 s, plynulý scroll, hodnocení perzistentní |
 | M2 | Engine MVP pro fotografie + stránka Obraz: node graf se serializací, Metal pipeline, základní korekce, adaptivní rozlišení náhledu, undo a redo | Posuvník expozice plynulý na 24 Mpx RAW, projekt se uloží a znovu otevře beze ztráty úprav |
 | M3 | Stránka Color: kola, saturace, vibrance, qualifier, křivky, node tree UI, import LUT, scopes | Selektivní korekce podle barvy funguje, LUT se aplikuje na místě, graph.json verzováno |

@@ -21,3 +21,6 @@ jobs:
 
       - name: Test
         run: swift test
+
+      - name: Release DMG + test spustitelnosti (scripts/test-release.sh)
+        run: scripts/test-release.sh

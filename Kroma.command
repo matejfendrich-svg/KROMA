@@ -12,6 +12,10 @@ cd "$(dirname "$0")"
 echo "==> Sestavuji Kroma (scripts/release.sh)..."
 ./scripts/release.sh
 
+echo ""
+echo "==> Ověřuji DMG (scripts/test-release.sh – bez varování Gatekeeperu, spustitelnost)..."
+./scripts/test-release.sh
+
 DMG="$(ls -t ./*.dmg 2>/dev/null | head -n 1 || true)"
 if [[ -n "${DMG}" ]]; then
     mv "${DMG}" ~/Desktop/
