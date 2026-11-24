@@ -1,0 +1,31 @@
+only_rules:
+  - line_length
+  - trailing_whitespace
+  - force_cast
+  - force_try
+  - force_unwrapping
+  - vertical_whitespace
+  - colon
+  - comma
+  - identifier_name
+
+line_length:
+  warning: 160
+  error: 240
+  ignores_comments: true
+  ignores_urls: true
+
+identifier_name:
+  min_length: 2
+  max_length: 60
+  excluded:
+    - id
+    - ev
+    - db
+    - r
+    - g
+    - b
+    - a
+
+vertical_whitespace:
+  max_empty_lines: 2
