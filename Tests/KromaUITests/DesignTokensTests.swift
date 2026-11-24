@@ -6,9 +6,9 @@ import KromaUI
 private func hexString(_ color: NSColor) -> String {
     String(
         format: "#%02X%02X%02X",
-        Int(color.redComponent * 255),
-        Int(color.greenComponent * 255),
-        Int(color.blueComponent * 255)
+        Int(round(color.redComponent * 255)),
+        Int(round(color.greenComponent * 255)),
+        Int(round(color.blueComponent * 255))
     )
 }
 
