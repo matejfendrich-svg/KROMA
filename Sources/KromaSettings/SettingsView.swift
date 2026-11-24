@@ -138,7 +138,7 @@ public struct SettingsView: View {
             group("Pracovní režim nových projektů") {
                 chipGroup(options: ["Galerie", "Resolve"], value: Binding(
                     get: { store.settings.defaultWorkMode == .resolve ? "Resolve" : "Galerie" },
-                    set: { store.update { $0.defaultWorkMode = $0 == "Resolve" ? .resolve : .gallery } }
+                    set: { newValue in store.update { $0.defaultWorkMode = newValue == "Resolve" ? .resolve : .gallery } }
                 ))
                 note("Resolve: projekt je timeline s fotkami, adjustment a text klipy. Galerie: klasický fotoeditor, Edit jen u videa/animace.")
             }
@@ -150,7 +150,7 @@ public struct SettingsView: View {
                 note("Monochromní rozhraní: černá, bílá a šedá. Barevná jsou výhradně balanční kola ve stránce Color.")
                 TextField("vlastní hex", text: Binding(
                     get: { store.settings.customAccentHex ?? "" },
-                    set: { store.update { $0.customAccentHex = $0.isEmpty ? nil : $0 } }
+                    set: { newValue in store.update { $0.customAccentHex = newValue.isEmpty ? nil : newValue } }
                 ))
                 .textFieldStyle(.plain)
                 .font(.system(size: 11, design: .monospaced))
@@ -164,18 +164,18 @@ public struct SettingsView: View {
             group("Měřítko rozhraní") {
                 KromaSlider(title: "Přiblížení celého UI", value: Binding(
                     get: { Double(store.settings.uiScale) },
-                    set: { store.update { $0.uiScale = Int($0) } }
+                    set: { newValue in store.update { $0.uiScale = Int(newValue) } }
                 ), range: 85...125, step: 1, defaultValue: 100, format: "%.0f %%")
                 note("Šířky bočních ploch se mění přetahováním za vnitřní hranu, dvojklik na hranu vrátí výchozí šířku.")
             }
             group("Vzhled a panely") {
                 KromaToggle("Mini náhled timeline (filmstrip)", isOn: Binding(
                     get: { store.settings.showTimelineFilmstrip },
-                    set: { store.update { $0.showTimelineFilmstrip = $0 } }
+                    set: { newValue in store.update { $0.showTimelineFilmstrip = newValue } }
                 ))
                 KromaToggle("Kompaktní velikost ovládacích prvků", isOn: Binding(
                     get: { store.settings.compactControls },
-                    set: { store.update { $0.compactControls = $0 } }
+                    set: { newValue in store.update { $0.compactControls = newValue } }
                 ))
             }
         }
@@ -190,11 +190,11 @@ public struct SettingsView: View {
                 ))
                 styledSelect("Rozlišení náhledu", options: ["Auto (fit panelu)", "1/4", "1/2", "Plné"], value: Binding(
                     get: { store.settings.previewResolution },
-                    set: { store.update { $0.previewResolution = $0 } }
+                    set: { newValue in store.update { $0.previewResolution = newValue } }
                 ))
                 styledSelect("Kvalita při interakci", options: ["Nízká", "Střední", "Vysoká"], value: Binding(
                     get: { store.settings.interactionQuality },
-                    set: { store.update { $0.interactionQuality = $0 } }
+                    set: { newValue in store.update { $0.interactionQuality = newValue } }
                 ))
             }
             group("Chlazení a baterie") {
@@ -204,17 +204,17 @@ public struct SettingsView: View {
                 ))
                 styledSelect("Práh termální reakce", options: ["fair", "serious", "critical"], value: Binding(
                     get: { store.settings.thermalThreshold },
-                    set: { store.update { $0.thermalThreshold = $0 } }
+                    set: { newValue in store.update { $0.thermalThreshold = newValue } }
                 ))
             }
             group("Cache a proxy") {
                 KromaSlider(title: "Maximální velikost cache", value: Binding(
                     get: { Double(store.settings.cacheSizeGB) },
-                    set: { store.update { $0.cacheSizeGB = Int($0) } }
+                    set: { newValue in store.update { $0.cacheSizeGB = Int(newValue) } }
                 ), range: 5...100, step: 1, defaultValue: 20, format: "%.0f GB")
                 KromaToggle("Generování proxy pro 4K video", isOn: Binding(
                     get: { store.settings.generateProxy },
-                    set: { store.update { $0.generateProxy = $0 } }
+                    set: { newValue in store.update { $0.generateProxy = newValue } }
                 ))
             }
         }
@@ -225,11 +225,11 @@ public struct SettingsView: View {
             group("Knihovna médií") {
                 KromaToggle("Kopírovat originály do spravované knihovny", isOn: Binding(
                     get: { store.settings.copyOriginalsIntoLibrary },
-                    set: { store.update { $0.copyOriginalsIntoLibrary = $0 } }
+                    set: { newValue in store.update { $0.copyOriginalsIntoLibrary = newValue } }
                 ))
                 KromaToggle("Zapisovat XML sidecar vedle originálů", isOn: Binding(
                     get: { store.settings.writeXMPSidecar },
-                    set: { store.update { $0.writeXMPSidecar = $0 } }
+                    set: { newValue in store.update { $0.writeXMPSidecar = newValue } }
                 ))
             }
         }
@@ -240,7 +240,7 @@ public struct SettingsView: View {
             group("Exportní fronta") {
                 chipGroup(options: ["1", "2", "4"], value: Binding(
                     get: { String(store.settings.exportQueueCount) },
-                    set: { store.update { $0.exportQueueCount = Int($0) ?? 2 } }
+                    set: { newValue in store.update { $0.exportQueueCount = Int(newValue) ?? 2 } }
                 ))
                 note("Fronta běží na pozadí v nízké prioritě; při termálním varování se úlohy pozastaví (spec 7.3).")
             }
@@ -291,11 +291,11 @@ public struct SettingsView: View {
             group("Jazyk a aktualizace") {
                 styledSelect("Jazyk aplikace", options: ["Čeština", "English"], value: Binding(
                     get: { store.settings.language },
-                    set: { store.update { $0.language = $0 } }
+                    set: { newValue in store.update { $0.language = newValue } }
                 ))
                 styledSelect("Kanál aktualizací", options: ["Stabilní", "Beta"], value: Binding(
                     get: { store.settings.updateChannel },
-                    set: { store.update { $0.updateChannel = $0 } }
+                    set: { newValue in store.update { $0.updateChannel = newValue } }
                 ))
             }
             group("Diagnostika") {
