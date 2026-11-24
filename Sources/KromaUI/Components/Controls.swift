@@ -45,10 +45,10 @@ public struct KromaButton: View {
                 .padding(.vertical, 12)
                 .background(background)
                 .overlay(
-                    RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius)
+                    RoundedRectangle(cornerRadius: DesignTokens.cardRadius)
                         .stroke(border, lineWidth: variant == .secondary ? 1 : 0)
                 )
-                .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius))
+                .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardRadius))
         }
         .buttonStyle(KromaPressStyle())
     }
@@ -139,8 +139,8 @@ public struct KromaSegmented<Value: Hashable>: View {
         }
         .padding(2)
         .background(DesignTokens.Palette.panel)
-        .overlay(RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius).stroke(DesignTokens.Palette.separator, lineWidth: 1))
-        .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius))
+        .overlay(RoundedRectangle(cornerRadius: DesignTokens.cardRadius).stroke(DesignTokens.Palette.separator, lineWidth: 1))
+        .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardRadius))
     }
 }
 

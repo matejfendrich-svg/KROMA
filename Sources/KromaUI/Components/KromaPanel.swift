@@ -12,10 +12,10 @@ public struct KromaPanel<Content: View>: View {
         content
             .background(DesignTokens.Palette.panel)
             .overlay(
-                RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius)
+                RoundedRectangle(cornerRadius: DesignTokens.cardRadius)
                     .stroke(DesignTokens.Palette.separator, lineWidth: DesignTokens.separatorWidth)
             )
-            .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardRadius))
     }
 }
 

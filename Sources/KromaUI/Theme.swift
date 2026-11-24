@@ -31,6 +31,7 @@ public enum AccentPreset: String, Codable, Sendable, CaseIterable, Identifiable 
 
 /// Aktivní téma aplikace. Uživatelsky konfigurovatelné přes nastavení.
 @Observable
+@MainActor
 public final class Theme {
     /// Sdílené téma aplikace (jedno okno; stránky k němu přistupují přes Theme.shared).
     public static let shared = Theme()

@@ -26,6 +26,7 @@ public enum DesignTokens {
         public static let panel = Color(hex: "#151719")
         public static let elevated = Color(hex: "#1C1F22")
         public static let separator = Color(hex: "#26282B")
+        public static let separatorStrong = Color(hex: "#3D3D3D")
         public static let textPrimary = Color(hex: "#F4F4F2")
         public static let textSecondary = Color(hex: "#A6A8AA")
         public static let faint = Color(hex: "#3A3E44")
